@@ -16,17 +16,15 @@
       },
     
       update: function() {
-        var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        var material = new THREE.MeshBasicMaterial( { color: "blue" } );
     
        var geometry = new THREE.BoxGeometry( 1, 1, 1 );
     
         this.el.setObject3D('mesh', new THREE.Mesh(geometry, material));
       },
-    
-      remove: function() {
-        this.el.removeObject3D('mesh');
-      }
+
     });
+
     </script>
     
     <a-scene embedded arjs>
