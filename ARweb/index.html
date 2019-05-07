@@ -5,9 +5,69 @@
   <body style='margin : 0px; overflow: hidden;'>
     <a-scene embedded arjs>
       <a-marker preset="hiro">
-          <a-box position='0 0.5 0' material='color: yellow;'></a-box>
+          <!-- <a-box position='0 0.5 0' material='color: yellow;'></a-box> -->
+          <a-entity mythreejsthing="color: green;" position="0 1 -5"> </a-entity>  
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
+
+    <!-- <a-scene>
+      <a-entity mythreejsthing="color: green;" position="0 1 -5"> </a-entity>                                                            
+    </a-scene> -->
+
+    <script>
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+			var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+			var cube = new THREE.Mesh( geometry, material );
+			scene.add( cube );
+
+			camera.position.z = 5;
+
+			var animate = function () {
+				requestAnimationFrame( animate );
+
+				cube.rotation.x += 0.01;
+				cube.rotation.y += 0.01;
+
+				renderer.render( scene, camera );
+			};
+			animate();
+
+
+AFRAME.registerComponent('mythreejsthing', {
+  schema: {
+    color: {
+      default: '#000'
+    },
+  },
+
+  update: function() {
+    var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+
+   var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+
+    this.el.setObject3D('mesh', new THREE.Mesh(geometry, material));
+  },
+
+  remove: function() {
+    this.el.removeObject3D('mesh');
+  }
+});
+
+</script>
+
+
+
+
+		</script>
+
+
   </body>
 </html>
