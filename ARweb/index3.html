@@ -2,30 +2,8 @@
 
 <!doctype HTML>
 <html>
-<script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
-<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
- 
+
 <body style='margin : 0px; overflow: hidden;'>
-  
-  <script>
-    AFRAME.registerComponent('mythreejsthing', {
-      schema: {
-        color: {
-          default: '#000'
-        },
-      },
-    
-      update: function() {
-        var material = new THREE.MeshBasicMaterial( { color: "blue" } );
-    
-       var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    
-        this.el.setObject3D('mesh', new THREE.Mesh(geometry, material));
-      },
-
-    });
-
-    </script>
     
     <a-scene embedded arjs>
       <a-marker preset="hiro">
@@ -35,5 +13,9 @@
       <a-entity camera></a-entity>
     </a-scene>
 
+   <script src="js/d3.min.js"></script>
+   <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+   <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+   <script src="js/main.js"></script>
   </body>
 </html>
