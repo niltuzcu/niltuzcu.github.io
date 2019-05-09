@@ -8,9 +8,9 @@
     
     <body style='margin : 0px; overflow: hidden;'>
         <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
-        <a-scene embedded arjs='debugUIEnabled: false>
+        <a-scene embedded arjs='debugUIEnabled: false; patternRatio: 0.75'>
 
-             <a-marker preset="custom" type="pattern" url="pattern-marker-flag.patt">
+             <a-marker preset="custom" type="pattern" url="pattern-marker-75.patt">
                 <a-box position='0 0.5 0' color="green"></a-box>
             </a-marker>
 
