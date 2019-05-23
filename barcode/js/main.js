@@ -1,7 +1,8 @@
 
+var xVar, yVar, zVar;
 var data;
-var continent = ["AS", "EU","SA","OC","AF"]
-var color_names = ["#7ddaa1","#F5CF23","#dab47d","#bb968a","#d97b7b"]
+var continent = ["AS", "EU","SA","OC","AF"];
+var color_names = ["#7ddaa1","#F5CF23","#dab47d","#bb968a","#d97b7b"];
 var scaleColor = d3.scaleOrdinal()
                 .domain(continent)
                 .range(color_names);  
@@ -22,17 +23,13 @@ function loadData() {
         });
         data = csv;		
         console.log(data);
-		draw("happy_planet_index","human_development_index","world_happiness_score");
+		draw(xVar, yVar, zVar);
     });
 }
 
 
             
 function draw(axisX, axisY, axisZ){
-
-data.forEach(function(d){
-    console.log(d["population"]);
-})
 
 var extentX = d3.extent(data,function(d){return d[axisX]});
 var extentY = d3.extent(data,function(d){return d[axisY]});
@@ -72,46 +69,87 @@ continent.forEach(function(d,i){
 
 });
 
-			
-		
 		// data.forEach(function(d){
-		// 	console.log(materialList);
-		// 	geometry = new THREE.SphereGeometry( scaleR(d.Export), 16, 16 );
+		// 	geometry = new THREE.SphereGeometry( scaleR(d.population), 16, 16 );
 		// 	sphere = new THREE.Mesh( geometry, materialList[d.continent] );
-		// 	sphere.position.set ( scaleX(d.Distance), scaleY(d.Cog), scaleZ(d.Pci));
+		// 	sphere.position.set ( scaleX(d[axisX]), scaleY(d[axisY]), scaleZ(d[axisZ]));
 		// 	scene.add( sphere );
-		// })
+        // })
 
-		data.forEach(function(d){
-			geometry = new THREE.SphereGeometry( scaleR(d.population), 16, 16 );
-			sphere = new THREE.Mesh( geometry, materialList[d.continent] );
-			sphere.position.set ( scaleX(d[axisX]), scaleY(d[axisY]), scaleZ(d[axisZ]));
-			scene.add( sphere );
-		})
 
-			camera.position.z = 400;
 
-			var light = new THREE.PointLight(0x777777, 1, 100);
-			light.position.set( 0, 0, 0);
-			scene.add ( light );
+        AFRAME.registerComponent('mythreejsthing', {
+            schema: {
+            color: {
+                default: '#000'
+            },
+            },
+        
+            update: function() {
 
-			var light2 = new THREE.PointLight(0x777777, 1, 100);
-			light.position.set( 50, 50, 50);
-			scene.add ( light2 );
+            // 	geometry = new THREE.SphereGeometry( scaleR(d.population), 16, 16 );
+		    // 	sphere = new THREE.Mesh( geometry, materialList[d.continent] );
+		    // 	sphere.position.set ( scaleX(d[axisX]), scaleY(d[axisY]), scaleZ(d[axisZ]));
+            //var material = new THREE.MeshBasicMaterial( { color: "blue" } );
+        
+            // var geometry = new THREE.BoxGeometry( 5, 5, 5 );
+            geometry = new THREE.SphereGeometry( scaleR(d.population), 16, 16 );
+        
+            this.el.setObject3D('mesh', new THREE.Mesh(geometry, materialList[d.continent] ));
+            },
+        });
+        
 
-			var light3 = new THREE.AmbientLight(0x333333, 1, 100);
-			scene.add ( light3 );
 
-			var animate = function () {
-				requestAnimationFrame( animate );
+			// camera.position.z = 400;
 
-				// sphere.rotation.x += 0.01;
-				// cube.rotation.y += 0.01;
+			// var light = new THREE.PointLight(0x777777, 1, 100);
+			// light.position.set( 0, 0, 0);
+			// scene.add ( light );
 
-				renderer.render( scene, camera );
-			};
+			// var light2 = new THREE.PointLight(0x777777, 1, 100);
+			// light.position.set( 50, 50, 50);
+			// scene.add ( light2 );
 
-			animate();
+			// var light3 = new THREE.AmbientLight(0x333333, 1, 100);
+			// scene.add ( light3 );
+
+			// var animate = function () {
+			// 	requestAnimationFrame( animate );
+
+			// 	// sphere.rotation.x += 0.01;
+			// 	// cube.rotation.y += 0.01;
+
+			// 	renderer.render( scene, camera );
+			// };
+
+            // animate();
+            $("#population").append("<a-entity mythreejsthing position='2 2 2'> </a-entity>");
 }			
 
-     loadData();   
+
+
+
+
+
+//WRITE A FRAME
+
+// AFRAME.registerComponent('mythreejsthing', {
+//     schema: {
+//       color: {
+//         default: '#000'
+//       },
+//     },
+  
+//     update: function() {
+//       var material = new THREE.MeshBasicMaterial( { color: "blue" } );
+  
+//      var geometry = new THREE.BoxGeometry( 5, 5, 5 );
+  
+//       this.el.setObject3D('mesh', new THREE.Mesh(geometry, material));
+//     },
+  
+//   //   remove: function() {
+//   //     this.el.removeObject3D('mesh');
+//   //   }
+//   });

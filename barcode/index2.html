@@ -11,95 +11,139 @@
     <script src="js/queue.v1.min.js"></script>
     <script src="js/d3.min.js"></script>
     <script src="js/dev-ar.min.js"></script>
+    <script src="js/main.js"></script>
     
     <body style='margin : 0px; overflow: hidden;'>
         <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
         <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
 
-            <a-marker id="markerTest" type='barcode' value='13'></a-marker>
-
-            <a-marker id="markerTest2" type='barcode' value='14'></a-marker>
-
-            <a-marker id="markerTest3" type='barcode' value='15'></a-marker>
-            
-            <a-marker id="markerTest4" type='barcode' value='16'></a-marker>
-
+            <a-marker id="happy_planet_index" type='barcode' value='10'></a-marker>
+            <a-marker id="human_development_index" type='barcode' value='20'></a-marker>
+            <a-marker id="world_happiness_score" type='barcode' value='33'></a-marker>          
+            <a-marker id="GDP_per_capita" type='barcode' value='43'></a-marker>
+            <a-marker id="population" type='barcode' value='48'></a-marker>
             <!-- use this <a-entity camera> to support multiple-markers, otherwise use <a-marker-camera> instead of </a-marker> -->
             <a-entity camera></a-entity>
         </a-scene>
 
     <script>
 
-
-    var marker1visible, marker2visible, marker3visible=false;
-    var xaxis,yaxis=null;
+    var happy_planet_indexvisible, human_development_indexvisible, world_happiness_scorevisible, GDP_per_capitavisible, populationvisible=false;
+    var xaxis,yaxis,zaxis=null;
     var vizReady=false;
     var dummybox=null;
+    var controlArray=[];
 
-    var m = document.querySelector("#markerTest");
+    var selMar10 = document.querySelector("#happy_planet_index");
+    var selMar20 = document.querySelector("#human_development_index");
+    var selMar33 = document.querySelector("#world_happiness_score");
+    var selMar43 = document.querySelector("#GDP_per_capita");
+    var selMar48 = document.querySelector("#population");
     
-    m.addEventListener("markerFound", (e)=>{
-            marker1visible=true;
+    selMar10.addEventListener("markerFound", (e)=>{
+            happy_planet_indexvisible=true;
+            controlArray.push(selMar10);
             updateViz();
     });
 
-    m.addEventListener("markerLost", (e)=>{
-            marker1visible=false;
+    selMar10.addEventListener("markerLost", (e)=>{
+            happy_planet_indexvisible=false;
     });
 
-    var m2 = document.querySelector("#markerTest2");
-    
-    m2.addEventListener("markerFound", (e)=>{
-           marker2visible=true;
-           updateViz();
+    selMar20.addEventListener("markerFound", (e)=>{
+            human_development_indexvisible=true;
+            controlArray.push(selMar20);
+            updateViz();
     });
 
-
-    m2.addEventListener("markerLost", (e)=>{
-        marker2visible=false;
+    selMar20.addEventListener("markerLost", (e)=>{
+            human_development_indexvisible=false;
     });
+
+    selMar33.addEventListener("markerFound", (e)=>{
+            world_happiness_scorevisible=true;
+            controlArray.push(selMar33);
+            updateViz();
+    });
+
+    selMar33.addEventListener("markerLost", (e)=>{
+            world_happiness_scorevisible=false;
+    });
+
+    selMar43.addEventListener("markerFound", (e)=>{
+            GDP_per_capitavisible=true;
+            controlArray.push(selMar43);
+            updateViz();
+    });
+
+    selMar43.addEventListener("markerLost", (e)=>{
+            GDP_per_capitavisible=false;
+    });
+
+    selMar48.addEventListener("markerFound", (e)=>{
+            populationvisible=true;
+            controlArray.push(selMar48);
+            updateViz();
+    });
+
+    selMar48.addEventListener("markerLost", (e)=>{
+            populationvisible=false;
+    });
+
 
     var updateViz = function(){
 
-        if(marker1visible && marker2visible){
-            var cameraEl1 = document.querySelector('#markerTest');
+        if(controlArray.length == 3){
+            var cameraEl1 = controlArray[0];
             var marker1pos = cameraEl1.object3D.getWorldPosition();
 
-            var cameraEl2 = document.querySelector('#markerTest2');
+            var cameraEl2 = controlArray[1];
             var marker2pos = cameraEl2.object3D.getWorldPosition();
 
-            if(marker1pos.x>marker2pos.x){
-                xaxis="Marker1";
-                yaxis="Marker2";
-            }
-            else{
-                xaxis="Marker2";
-                yaxis="Marker1";
-            }
-            vizReady=true;
+            var cameraEl3 = controlArray[2];
+            var marker3pos = cameraEl3.object3D.getWorldPosition();
 
+            var controlPosition = [marker1pos.x,marker2pos.x,marker3pos.x]
+
+            controlArray.sort(function(a, b){return a.object3D.getWorldPosition().x - b.object3D.getWorldPosition().x});
+
+            console.log(controlArray[0].id);
+
+            xVar = controlArray[0].id;
+            yVar = controlArray[1].id;
+            zVar = controlArray[2].id;
+
+            // if(marker1pos.x>marker2pos.x){
+            //     xaxis="Marker1";
+            //     yaxis="Marker2";
+            // }
+            // else{
+            //     xaxis="Marker2";
+            //     yaxis="Marker1";
+            // } 
+            loadData();
         }
-
-
-        if(vizReady){
-
-            if(xaxis=="Marker1"){
-                $("#markerTest").append("<a-box position='0 0.5 0' color='red'></a-box>");
-                $("#markerTest2").append("<a-box position='0 0.5 0' color='green'></a-box>");
-                $("#markerTest4").append("<a-box position='0 0.5 0' color='yellow'></a-box>");
-
-            }
-            else{
-                $("#markerTest").append("<a-box position='0 0.5 0' color='green'></a-box>");
-                $("#markerTest2").append("<a-box position='0 0.5 0' color='red'></a-box>");
-                $("#markerTest4").append("<a-box position='0 0.5 0' color='purple'></a-box>");
-            }
-        }
-            console.log("updateviz");
-
-     
     }
 
+
+        // if(vizReady){
+
+        //     if(xaxis=="Marker1"){
+        //         $("#markerTest").append("<a-box position='0 0.5 0' color='red'></a-box>");
+        //         $("#markerTest2").append("<a-box position='0 0.5 0' color='green'></a-box>");
+        //         $("#markerTest4").append("<a-box position='0 0.5 0' color='yellow'></a-box>");
+
+        //     }
+        //     else{
+        //         $("#markerTest").append("<a-box position='0 0.5 0' color='green'></a-box>");
+        //         $("#markerTest2").append("<a-box position='0 0.5 0' color='red'></a-box>");
+        //         $("#markerTest4").append("<a-box position='0 0.5 0' color='purple'></a-box>");
+        //     }
+        // }
+         
+
+     
+  
         </script>
     </body>
 </html>
