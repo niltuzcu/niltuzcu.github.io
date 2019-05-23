@@ -8,34 +8,34 @@
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <!-- <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script> -->
     <script src="js/jquery.min.js"></script>
+    <script src="js/queue.v1.min.js"></script>
+    <script src="js/d3.min.js"></script>
     <script src="js/dev-ar.min.js"></script>
     
     <body style='margin : 0px; overflow: hidden;'>
         <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
         <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
 
-            <a-marker id="markerTest" type='barcode' value='7'>
-            </a-marker>
+            <a-marker id="markerTest" type='barcode' value='13'></a-marker>
 
-            <a-marker id="markerTest2" type='barcode' value='6'>
-            </a-marker>
+            <a-marker id="markerTest2" type='barcode' value='14'></a-marker>
 
-            <a-marker id="markerTest3" preset="hiro">
-                </a-marker>
-                <a-marker id="markerTest4" preset="kanji">
-                </a-marker>
+            <a-marker id="markerTest3" type='barcode' value='15'></a-marker>
+            
+            <a-marker id="markerTest4" type='barcode' value='16'></a-marker>
 
             <!-- use this <a-entity camera> to support multiple-markers, otherwise use <a-marker-camera> instead of </a-marker> -->
             <a-entity camera></a-entity>
         </a-scene>
 
-        <script>
+    <script>
 
 
     var marker1visible, marker2visible, marker3visible=false;
     var xaxis,yaxis=null;
     var vizReady=false;
     var dummybox=null;
+
     var m = document.querySelector("#markerTest");
     
     m.addEventListener("markerFound", (e)=>{
@@ -58,9 +58,6 @@
     m2.addEventListener("markerLost", (e)=>{
         marker2visible=false;
     });
-
-    
-
 
     var updateViz = function(){
 
