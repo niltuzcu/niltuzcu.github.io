@@ -25,7 +25,7 @@ function loadData() {
         console.log(data);
 		draw(xVar, yVar, zVar);
     });
-}
+};
 
 
             
@@ -37,27 +37,27 @@ var extentZ = d3.extent(data,function(d){return d[axisZ]});
 var extentR = d3.extent(data,function(d){return d["population"]});
 
 var scaleX = d3.scaleLinear()
-				.range([0,200])
+				.range([-2,2])
 				.domain(extentX);
 
 var scaleY = d3.scaleLinear()
-				.range([0,200])
+				.range([0,4])
 				.domain(extentY);
 
 var scaleZ = d3.scaleLinear()
-				.range([0,200])
+				.range([-2,2])
 				.domain(extentZ);
 
 var scaleR = d3.scaleSqrt()
-				.range([1,10])
+				.range([0.1,0.5])
 				.domain(extentR);
 
-	        var scene = new THREE.Scene();
-			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+	        // var scene = new THREE.Scene();
+			// var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
-			var renderer = new THREE.WebGLRenderer();
-			renderer.setSize( window.innerWidth, window.innerHeight );
-			document.body.appendChild( renderer.domElement );
+			// var renderer = new THREE.WebGLRenderer();
+			// renderer.setSize( window.innerWidth, window.innerHeight );
+			// document.body.appendChild( renderer.domElement );
 
 var materialList ={};
 
@@ -69,14 +69,6 @@ continent.forEach(function(d,i){
 
 });
 
-		// data.forEach(function(d){
-		// 	geometry = new THREE.SphereGeometry( scaleR(d.population), 16, 16 );
-		// 	sphere = new THREE.Mesh( geometry, materialList[d.continent] );
-		// 	sphere.position.set ( scaleX(d[axisX]), scaleY(d[axisY]), scaleZ(d[axisZ]));
-		// 	scene.add( sphere );
-        // })
-
-
 
         AFRAME.registerComponent('mythreejsthing', {
             schema: {
@@ -86,70 +78,31 @@ continent.forEach(function(d,i){
             },
         
             update: function() {
+                myComponent = this;
+                var dataGroup = new THREE.Group();
+                data.forEach(function(d){
+                    geometry = new THREE.SphereGeometry( scaleR(d.population), 2, 2 );
+                    mesh= new THREE.Mesh(geometry, materialList[d.continent]);
+                    mesh.position.set ( scaleX(d[axisX]), scaleY(d[axisY]), scaleZ(d[axisZ]));
+                    
+                    dataGroup.add(mesh);
+                });
+                myComponent.el.setObject3D('mesh', dataGroup);
+              
+                // var rotate = function(){
+                //     dataGroup.rotation+=0.1;
+                //     console.log(dataGroup.rotation);
+                // }
+                // setInterval(rotate, 100);
 
-            // 	geometry = new THREE.SphereGeometry( scaleR(d.population), 16, 16 );
-		    // 	sphere = new THREE.Mesh( geometry, materialList[d.continent] );
-		    // 	sphere.position.set ( scaleX(d[axisX]), scaleY(d[axisY]), scaleZ(d[axisZ]));
-            //var material = new THREE.MeshBasicMaterial( { color: "blue" } );
+
+             },
+        })
         
-            // var geometry = new THREE.BoxGeometry( 5, 5, 5 );
-            geometry = new THREE.SphereGeometry( scaleR(d.population), 16, 16 );
-        
-            this.el.setObject3D('mesh', new THREE.Mesh(geometry, materialList[d.continent] ));
-            },
-        });
-        
+            $("#population").append("<a-entity mythreejsthing position='0 0 0'></a-entity>");
+                        
 
-
-			// camera.position.z = 400;
-
-			// var light = new THREE.PointLight(0x777777, 1, 100);
-			// light.position.set( 0, 0, 0);
-			// scene.add ( light );
-
-			// var light2 = new THREE.PointLight(0x777777, 1, 100);
-			// light.position.set( 50, 50, 50);
-			// scene.add ( light2 );
-
-			// var light3 = new THREE.AmbientLight(0x333333, 1, 100);
-			// scene.add ( light3 );
-
-			// var animate = function () {
-			// 	requestAnimationFrame( animate );
-
-			// 	// sphere.rotation.x += 0.01;
-			// 	// cube.rotation.y += 0.01;
-
-			// 	renderer.render( scene, camera );
-			// };
-
-            // animate();
-            $("#population").append("<a-entity mythreejsthing position='2 2 2'> </a-entity>");
 }			
 
-
-
-
-
-
-//WRITE A FRAME
-
-// AFRAME.registerComponent('mythreejsthing', {
-//     schema: {
-//       color: {
-//         default: '#000'
-//       },
-//     },
-  
-//     update: function() {
-//       var material = new THREE.MeshBasicMaterial( { color: "blue" } );
-  
-//      var geometry = new THREE.BoxGeometry( 5, 5, 5 );
-  
-//       this.el.setObject3D('mesh', new THREE.Mesh(geometry, material));
-//     },
-  
-//   //   remove: function() {
-//   //     this.el.removeObject3D('mesh');
-//   //   }
-//   });
+//ANIMATION 
+animation='property: rotation; to: 0 360 0; loop: true; easing: linear; dur: 4000;'
