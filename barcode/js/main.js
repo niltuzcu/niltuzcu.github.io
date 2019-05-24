@@ -99,7 +99,7 @@ continent.forEach(function(d,i){
              },
         })
         
-            $("#population").append("<a-entity mythreejsthing position='0 0 0'></a-entity>");
+            $("#population").append("<a-entity id='animated-model' mythreejsthing position='0 0 0'></a-entity>");
                         
 
 }			
