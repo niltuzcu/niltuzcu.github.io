@@ -3,19 +3,138 @@
     <head>
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     </head>
+    <!-- <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script> -->
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
-    <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://unpkg.com/aframe-curve-component/dist/aframe-curve-component.min.js"></script>
+
+    <!-- <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script> -->
+
+  
+    <script src="js/jquery.min.js"></script>
+    <script src="js/queue.v1.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/dev-ar.min.js"></script>
+    <script src="js/main3.js"></script>
     
     <body style='margin : 0px; overflow: hidden;'>
-        <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
-        <a-scene embedded arjs='debugUIEnabled: false; patternRatio: 0.75'>
+        <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
 
-             <a-marker preset="custom" type="pattern" url="pattern-marker-75.patt">
-                <a-box position='0 0.5 0' color="green"></a-box>
-            </a-marker>
+            <a-marker id="happy_planet_index" type='barcode' value='10'></a-marker>
+            <a-marker id="human_development_index" type='barcode' value='20'></a-marker>
+            <a-marker id="world_happiness_score" type='barcode' value='33'></a-marker>          
+            <a-marker id="GDP_per_capita" type='barcode' value='43'></a-marker>
+            <a-marker id="population" type='barcode' value='48'></a-marker>
 
             <!-- use this <a-entity camera> to support multiple-markers, otherwise use <a-marker-camera> instead of </a-marker> -->
             <a-entity camera></a-entity>
         </a-scene>
+
+
+    <script>
+    var happy_planet_indexvisible, human_development_indexvisible, world_happiness_scorevisible, GDP_per_capitavisible, populationvisible=false;
+    var xaxis,yaxis,zaxis=null;
+    var vizReady=false;
+    var dummybox=null;
+    var controlArray=[];
+
+    var selMar10 = document.querySelector("#happy_planet_index");
+    var selMar20 = document.querySelector("#human_development_index");
+    var selMar33 = document.querySelector("#world_happiness_score");
+    var selMar43 = document.querySelector("#GDP_per_capita");
+    var selMar48 = document.querySelector("#population");
+    var mar10Pos,  mar48Pos;
+
+    selMar10.addEventListener("markerFound", (e)=>{
+            console.log("marker 10 found");
+            happy_planet_indexvisible=true;
+            controlArray.push(selMar10);
+            // mar10Pos = document.querySelector("#happy_planet_index").object3D.position;    
+           
+            updateViz();     
+    });
+ 
+    // selMar10.addEventListener("markerLost", (e)=>{
+    //         happy_planet_indexvisible=false;
+    // });
+
+    // selMar20.addEventListener("markerFound", (e)=>{
+    //         human_development_indexvisible=true;
+    //         controlArray.push(selMar20);
+    //         updateViz();
+    // });
+
+    // selMar20.addEventListener("markerLost", (e)=>{
+    //         human_development_indexvisible=false;
+    // });
+
+    // selMar33.addEventListener("markerFound", (e)=>{
+    //         world_happiness_scorevisible=true;
+    //         controlArray.push(selMar33);
+    //         updateViz();
+    // });
+
+    // selMar33.addEventListener("markerLost", (e)=>{
+    //         world_happiness_scorevisible=false;
+    // });
+
+    // selMar43.addEventListener("markerFound", (e)=>{
+    //         GDP_per_capitavisible=true;
+    //         controlArray.push(selMar43);
+    //         updateViz();
+    // });
+
+    // selMar43.addEventListener("markerLost", (e)=>{
+    //         GDP_per_capitavisible=false;
+    // });
+
+    selMar48.addEventListener("markerFound", (e)=>{
+            console.log("marker 48 found");
+            populationvisible=true;
+            controlArray.push(selMar48);
+            // mar48Pos = document.querySelector("#population").object3D.position;
+            updateViz();
+            
+    });
+
+    // selMar48.addEventListener("markerLost", (e)=>{
+    //         populationvisible=false;
+    // });
+
+function updateViz(){
+    
+    if (controlArray.length == 2){
+            console.log("update viz function is called");
+            // mar10Pos = document.querySelector("#happy_planet_index").object3D.getWorldPosition();
+            // mar48Pos = document.querySelector("#population").object3D.getWorldPosition();
+            // console.log(mar10Pos.y);
+
+            test1 = document.querySelector("#population").object3D.position;
+            test2 = document.querySelector("#population").object3D.getWorldPosition();
+
+            $("#population").append("<a-sphere id='test-sphere' position='0 0 0' radius='0.25' color= '#EF2D5E'></a-sphere>");
+            test4 = document.querySelector("#test-sphere").getAttribute('position');
+            console.log(test1);
+            console.log(test2);
+    
+            console.log(test4);
+            var cameraEl = document.querySelector('#test-sphere');
+            var worldPos = new THREE.Vector3();
+            worldPos.setFromMatrixPosition(cameraEl.object3D.matrixWorld);
+            console.log(worldPos.x);
+
+           
+            
+
+            // var curve = "<a-curve id='track1' type='CatmullRom'> <a-curve-point position='"+ mar10Pos.x +" "+ mar10Pos.y +" "+ mar10Pos.z +"' geometry='primitive:box; height:0.1; width:0.1; depth:0.1' material='color:red'></a-curve-point> <a-curve-point position='"+ ((mar10Pos.x + mar48Pos.x)/2) +" "+ (mar10Pos.y + 0.01) +" "+ ((mar10Pos.z + mar48Pos.z)/2) +"' geometry='primitive:box; height:0.1; width:0.1; depth:0.1' material='color:blue'></a-curve-point> <a-curve-point position='"+ mar48Pos.x +" "+ mar48Pos.y +" "+ mar48Pos.z +"' geometry='primitive:box; height:0.1; width:0.1; depth:0.1' material='color:yellow'></a-curve-point> </a-curve> <a-draw-curve curveref='#track1' material='shader: line; color: blue;'></a-draw-curve>"
+            // var curve2 = "<a-curve id='track1' type='CatmullRom'> <a-curve-point position='-2 1 -3' geometry='primitive:box; height:0.1; width:0.1; depth:0.1' material='color:red'></a-curve-point> <a-curve-point position='0 0 -3' geometry='primitive:box; height:0.1; width:0.1; depth:0.1' material='color:blue'></a-curve-point> <a-curve-point position='2 1 -5' geometry='primitive:box; height:0.1; width:0.1; depth:0.1' material='color:yellow'></a-curve-point> </a-curve> <a-draw-curve curveref='#track1' material='shader: line; color: blue;'></a-draw-curve>"
+            // $("#population").append(curve);
+
+    }
+}
+  
+  
+        </script>
     </body>
 </html>
+

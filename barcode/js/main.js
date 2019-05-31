@@ -52,13 +52,6 @@ var scaleR = d3.scaleSqrt()
 				.range([0.1,0.5])
 				.domain(extentR);
 
-	        // var scene = new THREE.Scene();
-			// var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-
-			// var renderer = new THREE.WebGLRenderer();
-			// renderer.setSize( window.innerWidth, window.innerHeight );
-			// document.body.appendChild( renderer.domElement );
-
 var materialList ={};
 
 	materialTest = new THREE.MeshPhongMaterial( { color: "red", specular: 0x000000, flatShading: true, side: THREE.DoubleSide } );
@@ -87,20 +80,23 @@ continent.forEach(function(d,i){
                     
                     dataGroup.add(mesh);
                 });
-                myComponent.el.setObject3D('mesh', dataGroup);
+                var allObjects = myComponent.el.setObject3D('mesh', dataGroup);
               
                 // var rotate = function(){
                 //     dataGroup.rotation+=0.1;
                 //     console.log(dataGroup.rotation);
                 // }
                 // setInterval(rotate, 100);
-
-
              },
+
+            //  tick: function (time, timeDelta) {
+            //      console.log("tick tack");
+            //     allObjects.children.rotation+=0.1;
+            //   }
+
         })
         
-            $("#population").append("<a-entity id='animated-model' mythreejsthing position='0 0 0'></a-entity>");
-                        
+            $("#population").append("<a-entity physics='boundingRadius: 1.5; mass: 1' id='animated-model' mythreejsthing position='0 0 0'></a-entity>");
 
 }			
 

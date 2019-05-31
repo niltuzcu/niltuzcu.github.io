@@ -1,0 +1,7 @@
+      <a-curve id='track1' type='CatmullRom'>
+        <a-curve-point position='"+ mar10Pos.x +" "+ mar10Pos.y +" "+ mar10Pos.z +"' geometry='primitive:box; height:0.1; width:0.1; depth:0.1' material='color:red'></a-curve-point>
+        <a-curve-point position='0 0 -3' geometry='primitive:box; height:0.1; width:0.1; depth:0.1' material='color:blue'></a-curve-point>
+        <a-curve-point position='2 1 -5' geometry='primitive:box; height:0.1; width:0.1; depth:0.1' material='color:yellow'></a-curve-point>
+      </a-curve>
+
+      <a-draw-curve curveref='#track1' material='shader: line; color: blue;'></a-draw-curve>
