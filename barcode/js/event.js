@@ -11,6 +11,7 @@ AFRAME.registerComponent('markerhandler', {
             if (ev.target.getAttribute('name')!=null) {
                 const intersectedElement = ev.target;
                 console.log(intersectedElement.getAttribute('name'));
+                $("#countryName").html("<p style='text-align:center; color:white; background-color:black; font-size:20px; text-transform:uppercase; line-height:2'>" + intersectedElement.getAttribute('name') + "</p>")
                 // console.log("event js from hello");
                 // const scale = aEntity.getAttribute('scale');
                 // Object.keys(scale).forEach((key) => scale[key] = scale[key] + 1);

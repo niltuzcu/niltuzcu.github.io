@@ -64,7 +64,7 @@ var materialList ={"AF":"red","AS":"blue","EU":"yellow","OC":"green","SA":"pink"
 
 data.forEach(function(d){
 
-    var box= "<a-box class='box' name='"+ d.name +"' rotation='0 45 45' position='"+scaleX(d[axisX])+" "+scaleY(d[axisY])+" "+ scaleZ(d[axisZ])+"' scale='0.1 0.1 0.1' color=' "+ materialList[d.continent] +"'></a-box>";
+    var box= "<a-box class='box' name='"+ d.name +"' rotation='0 45 45' position='"+scaleX(d[axisX])+" "+scaleY(d[axisY])+" "+ scaleZ(d[axisZ])+"' scale='0.15 0.15 0.15' color=' "+ materialList[d.continent] +"'></a-box>";
     var sphere = "<a-sphere rotation='0 45 45' position='"+scaleX(d[axisX])+" "+scaleY(d[axisY])+" "+ scaleZ(d[axisZ])+"' radius='"+ scaleR(d.population) +"' color=' "+ materialList[d.continent] +"'></a-sphere>";
     $("#population").append( box );
 });
