@@ -3,7 +3,7 @@ AFRAME.registerComponent('markerhandler', {
     init: function() {
         console.log("event js called");
         const animatedMarker = document.querySelector(".animated-marker");
-        const aEntity = document.querySelector(".box");
+        const aEntity = document.querySelector(".sphere");
 
         // every click, we make our model grow in size :)
         animatedMarker.addEventListener('click', function(ev, target){
@@ -21,7 +21,7 @@ AFRAME.registerComponent('markerhandler', {
     },
     tick: function(time,deltaTime){
         console.log("tick tock tick tock");
-        const boxes = document.querySelectorAll(".box");
+        const boxes = document.querySelectorAll(".sphere");
             boxes.forEach(function(box){
                  const rotation = box.getAttribute('rotation');
                  Object.keys(rotation).forEach((key) => rotation[key] = rotation[key] + 2);
