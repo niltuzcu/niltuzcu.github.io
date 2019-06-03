@@ -52,7 +52,7 @@ var scaleR = d3.scaleSqrt()
 				.range([0.1,0.5])
 				.domain(extentR);
 
-var materialList ={"AF":"red","AS":"blue","EU":"yellow","OC":"green","SA":"pink"};
+var materialList ={"AF":"#BA5454","AS":"#CEC555","EU":"#4ABAB4","OC":"#59A7CE","SA":"#EAA678"};
 
 	materialTest = new THREE.MeshPhongMaterial( { color: "red", specular: 0x000000, flatShading: true, side: THREE.DoubleSide } );
 
@@ -65,7 +65,7 @@ var materialList ={"AF":"red","AS":"blue","EU":"yellow","OC":"green","SA":"pink"
 data.forEach(function(d){
 
     var box= "<a-box class='box' name='"+ d.name +"' rotation='0 45 45' position='"+scaleX(d[axisX])+" "+scaleY(d[axisY])+" "+ scaleZ(d[axisZ])+"' scale='0.15 0.15 0.15' color=' "+ materialList[d.continent] +"'></a-box>";
-    var sphere = "<a-sphere rotation='0 45 45' position='"+scaleX(d[axisX])+" "+scaleY(d[axisY])+" "+ scaleZ(d[axisZ])+"' radius='"+ scaleR(d.population) +"' color=' "+ materialList[d.continent] +"'></a-sphere>";
+    var sphere = "<a-sphere class='sphere' rotation='0 45 45' position='"+scaleX(d[axisX])+" "+scaleY(d[axisY])+" "+ scaleZ(d[axisZ])+"' radius='"+ scaleR(d.population) +"' color=' "+ materialList[d.continent] +"'></a-sphere>";
     $("#" +axisZ).append( box );
 });
 
