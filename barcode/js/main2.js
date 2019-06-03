@@ -58,14 +58,14 @@ var materialList ={"AF":"#BA5454","AS":"#CEC555","EU":"#4ABAB4","OC":"#59A7CE","
 
 // continent.forEach(function(d,i){
 
-// 	materialList[d] = new THREE.MeshPhongMaterial( { color: color_names[i], specular: 0x000000, flatShading: true, side: THREE.DoubleSide } );
+// 	materialList[d] = new THREE.MeshPhongMaterial( { color: color_names[i], specular: 0x000000, flatShading: true, side: THREE.DoubleSide } ); 
 
 // });
 
 data.forEach(function(d){
 
     var box= "<a-box class='box' name='"+ d.name +"' rotation='0 45 45' position='"+scaleX(d[axisX])+" "+scaleY(d[axisY])+" "+ scaleZ(d[axisZ])+"' scale='0.15 0.15 0.15' color=' "+ materialList[d.continent] +"'></a-box>";
-    var sphere = "<a-sphere class='sphere' rotation='0 45 45' position='"+scaleX(d[axisX])+" "+scaleY(d[axisY])+" "+ scaleZ(d[axisZ])+"' radius='"+ scaleR(d.population) +"' color=' "+ materialList[d.continent] +"' alphaTest=0.5></a-sphere>";
+    var sphere = "<a-sphere class='sphere' rotation='0 45 45' position='"+scaleX(d[axisX])+" "+scaleY(d[axisY])+" "+ scaleZ(d[axisZ])+"' radius='"+ scaleR(d.population) +"' color=' "+ materialList[d.continent] +"' alphaTest='0.5' transparent='true' opacity='0.9'></a-sphere>";
     $("#" +axisZ).append( sphere );
 });
 
