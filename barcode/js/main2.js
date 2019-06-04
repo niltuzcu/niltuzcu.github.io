@@ -41,7 +41,7 @@ var scaleX = d3.scaleLinear()
 				.domain(extentX);
 
 var scaleY = d3.scaleLinear()
-				.range([0,10])
+				.range([0,1])
 				.domain(extentY);
 
 var scaleZ = d3.scaleLinear()
@@ -58,7 +58,7 @@ var materialList ={"AF":"#BA5454","AS":"#CEC555","EU":"#4ABAB4","OC":"#59A7CE","
 
 data.forEach(function(d){
 
-    var box= "<a-box class='box' name='"+ d.name +"' rotation='0 45 45' position='"+scaleX(d[axisX])+" "+scaleY(d[axisY])+" "+ scaleZ(d[axisZ])+"' scale='0.15 0.15 0.15' color=' "+ materialList[d.continent] +"'></a-box>";
+    var box= "<a-box class='box' name='"+ d.name +"' rotation='0 45 45' position='"+scaleX(d[axisX])+" "+scaleY(d[axisY])+" "+ scaleZ(d[axisZ])+"' scale='0.2 0.2 0.2' color=' "+ materialList[d.continent] +"' opacity='0.8'></a-box>";
     var sphere = "<a-sphere class='sphere' rotation='0 45 45' position='"+scaleX(d[axisX])+" "+scaleY(d[axisY])+" "+ scaleZ(d[axisZ])+"' radius='"+ scaleR(d.population) +"' color=' "+ materialList[d.continent] +"' alphaTest='0.5' transparent='true' opacity='0.9'></a-sphere>";
     $("#" +axisY).append( box );
 });

@@ -25,11 +25,11 @@
         <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
         <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
                 <div style="position: absolute; width: 100%" id='countryName'></div>
-            <a-marker id="happy_planet_index" type='barcode' value='10'></a-marker>
-            <a-marker id="human_development_index" type='barcode' value='48'></a-marker>
-            <a-marker id="world_happiness_score" type='barcode' value='33'></a-marker>          
-            <a-marker id="GDP_per_capita" type='barcode' value='43'></a-marker>
-            <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse"  class="animated-marker" id="population" type='barcode' value='20'>
+            <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" class="animated-marker" id="happy_planet_index" type='barcode' value='10'></a-marker>
+            <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" class="animated-marker" id="human_development_index" type='barcode' value='48'></a-marker>
+            <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" class="animated-marker" id="world_happiness_score" type='barcode' value='33'></a-marker>          
+            <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" class="animated-marker" id="GDP_per_capita" type='barcode' value='43'></a-marker>
+            <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" class="animated-marker" id="population" type='barcode' value='20'>
                     <!-- <a-entity id="rain" particle-system="preset: rain; color: #24CAFF; particleCount: 5000"></a-entity>
 
                     <a-entity id="sphere" geometry="primitive: sphere"
@@ -74,16 +74,14 @@
             happy_planet_indexvisible=true;
             controlArray.push(selMar10);
             updateViz();
-            var array = [2, 5, 9];
-                console.log(array)
-                var index = array.indexOf(5);
-                if (index > -1) {
-                array.splice(index, 1);
-                }
     });
 
     selMar10.addEventListener("markerLost", (e)=>{
             happy_planet_indexvisible=false;
+                var index = array.indexOf(selMar10);
+                if (index > -1) {
+                 controlArray.splice(index, 1);
+                }
     });
 
     selMar20.addEventListener("markerFound", (e)=>{
@@ -94,6 +92,10 @@
 
     selMar20.addEventListener("markerLost", (e)=>{
             human_development_indexvisible=false;
+            var index = array.indexOf(selMar20);
+                if (index > -1) {
+                 controlArray.splice(index, 1);
+                }
     });
 
     selMar33.addEventListener("markerFound", (e)=>{
@@ -104,6 +106,10 @@
 
     selMar33.addEventListener("markerLost", (e)=>{
             world_happiness_scorevisible=false;
+            var index = array.indexOf(selMar33);
+                if (index > -1) {
+                 controlArray.splice(index, 1);
+                }
     });
 
     selMar43.addEventListener("markerFound", (e)=>{
@@ -114,6 +120,10 @@
 
     selMar43.addEventListener("markerLost", (e)=>{
             GDP_per_capitavisible=false;
+            var index = array.indexOf(selMar43);
+                if (index > -1) {
+                 controlArray.splice(index, 1);
+                }
     });
 
     selMar48.addEventListener("markerFound", (e)=>{
@@ -124,6 +134,10 @@
 
     selMar48.addEventListener("markerLost", (e)=>{
             populationvisible=false;
+            var index = array.indexOf(selMar48);
+                if (index > -1) {
+                 controlArray.splice(index, 1);
+                }
     });
 
 
