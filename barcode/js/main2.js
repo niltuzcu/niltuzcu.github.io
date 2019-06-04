@@ -37,15 +37,15 @@ var extentZ = d3.extent(data,function(d){return d[axisZ]});
 var extentR = d3.extent(data,function(d){return d["population"]});
 
 var scaleX = d3.scaleLinear()
-				.range([-2,2])
+				.range([0,10])
 				.domain(extentX);
 
 var scaleY = d3.scaleLinear()
-				.range([0,4])
+				.range([0,10])
 				.domain(extentY);
 
 var scaleZ = d3.scaleLinear()
-				.range([-2,2])
+				.range([0,10])
 				.domain(extentZ);
 
 var scaleR = d3.scaleSqrt()
