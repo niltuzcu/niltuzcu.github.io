@@ -37,7 +37,7 @@ var extentZ = d3.extent(data,function(d){return d[axisZ]});
 var extentR = d3.extent(data,function(d){return d["population"]});
 
 var scaleX = d3.scaleLinear()
-				.range([0,10])
+				.range([-5,5])
 				.domain(extentX);
 
 var scaleY = d3.scaleLinear()
@@ -45,11 +45,11 @@ var scaleY = d3.scaleLinear()
 				.domain(extentY);
 
 var scaleZ = d3.scaleLinear()
-				.range([0,10])
+				.range([-5,5])
 				.domain(extentZ);
 
 var scaleR = d3.scaleSqrt()
-				.range([0.1,0.5])
+				.range([0.1,0.6])
 				.domain(extentR);
 
 var materialList ={"AF":"#BA5454","AS":"#CEC555","EU":"#4ABAB4","OC":"#59A7CE","SA":"#EAA678"};
