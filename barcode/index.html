@@ -78,7 +78,7 @@
 
     selMar10.addEventListener("markerLost", (e)=>{
             happy_planet_indexvisible=false;
-                var index = array.indexOf(selMar10);
+                var index = controlArray.indexOf(selMar10);
                 if (index > -1) {
                  controlArray.splice(index, 1);
                 }
@@ -92,7 +92,7 @@
 
     selMar20.addEventListener("markerLost", (e)=>{
             human_development_indexvisible=false;
-            var index = array.indexOf(selMar20);
+            var index = controlArray.indexOf(selMar20);
                 if (index > -1) {
                  controlArray.splice(index, 1);
                 }
@@ -106,7 +106,7 @@
 
     selMar33.addEventListener("markerLost", (e)=>{
             world_happiness_scorevisible=false;
-            var index = array.indexOf(selMar33);
+            var index = controlArray.indexOf(selMar33);
                 if (index > -1) {
                  controlArray.splice(index, 1);
                 }
@@ -120,7 +120,7 @@
 
     selMar43.addEventListener("markerLost", (e)=>{
             GDP_per_capitavisible=false;
-            var index = array.indexOf(selMar43);
+            var index = controlArray.indexOf(selMar43);
                 if (index > -1) {
                  controlArray.splice(index, 1);
                 }
@@ -134,7 +134,7 @@
 
     selMar48.addEventListener("markerLost", (e)=>{
             populationvisible=false;
-            var index = array.indexOf(selMar48);
+            var index = controlArray.indexOf(selMar48);
                 if (index > -1) {
                  controlArray.splice(index, 1);
                 }

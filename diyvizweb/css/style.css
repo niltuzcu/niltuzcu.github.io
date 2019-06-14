@@ -1,0 +1,69 @@
+body{
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Oxygen Mono', monospace;
+}
+
+h1{
+ text-transform: capitalize;
+ letter-spacing: 3px;
+ margin: 0;
+}
+
+h4{
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin: 0;
+    margin-top: 3rem;
+}
+
+.landing{
+    background-color: #5b5e6b;
+    height: 100%;
+    width: 100%;
+}
+
+.big-logo-wrapper{
+    position: absolute;
+    width: 30%;
+    margin-left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#svg{
+    width: 100%;
+}
+
+.text-wrapper{
+    position: absolute;
+    width: 40%;
+    margin-left: 50%;
+    float: right;
+    color: white;
+    top: calc(50% + 3rem);
+    transform: translateY(-50%);
+}
+
+.navigation{
+    position: absolute;
+    right: 5%;
+}
+
+li{
+    display: inline-block;
+    line-height: 40px;
+    padding: 0 10px;
+    margin: 0;
+    list-style: none;
+    color: white;
+    font-size: 14px;
+}
+
+li:hover{
+    cursor: pointer;
+    border-bottom: 2px solid white;
+}
+
