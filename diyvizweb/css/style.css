@@ -6,6 +6,11 @@ body{
     font-family: 'Oxygen Mono', monospace;
 }
 
+a{
+    text-decoration: none;
+    color:white;
+}
+
 h1{
  text-transform: capitalize;
  letter-spacing: 3px;
@@ -19,11 +24,65 @@ h4{
     margin-top: 3rem;
 }
 
+h2{
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin: 0;
+    color: #7399a1;
+    margin-bottom: 1rem;
+}
+
+p{
+    margin: 0;
+}
+
 .landing{
-    background-color: #5b5e6b;
+    /* background-color: #5b5e6b; */
     height: 100%;
     width: 100%;
+    background: linear-gradient(220deg, #1d2d2e, #8bb5c0, #c4caa4);
+	background-size: 300% 300%;
+	-webkit-animation: Gradient 20s ease-in-out infinite;
+	-moz-animation: Gradient 20s ease-in-out infinite;
+  animation: Gradient 20s ease-in-out infinite;
 }
+
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
 
 .big-logo-wrapper{
     position: absolute;
@@ -49,13 +108,20 @@ h4{
 
 .navigation{
     position: absolute;
-    right: 5%;
+    right: 0; 
+    width: 100%;
+}
+
+ul{
+    margin: 0;
+    float: right;
+    margin-right: 5%;
 }
 
 li{
     display: inline-block;
-    line-height: 40px;
-    padding: 0 10px;
+    line-height: 60px;
+    /* padding: 0 10px; */
     margin: 0;
     list-style: none;
     color: white;
@@ -64,6 +130,40 @@ li{
 
 li:hover{
     cursor: pointer;
-    border-bottom: 2px solid white;
 }
 
+li:hover a{
+    border-bottom: 1px solid white;
+}
+
+.navigation-page{
+    width: 100%;
+    background: linear-gradient(220deg, #1d2d2e, #8bb5c0, #c4caa4);
+	background-size: 300% 300%;
+	-webkit-animation: Gradient 20s ease-in-out infinite;
+	-moz-animation: Gradient 20s ease-in-out infinite;
+  animation: Gradient 20s ease-in-out infinite;
+  position: absolute;
+  box-shadow: 0px 1px 1px #0000004a;
+}
+
+.about{
+    position: absolute;
+    top: 6rem;
+    width: 60%;
+    left: 20%;
+}
+
+.about-text{
+    line-height: 1.5;
+    font-size: 20px;
+    color: #666666;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.small-logo{
+    height: 35px;
+    margin-top: 15px;
+    margin-left: 5%;
+    cursor: pointer;
+}
