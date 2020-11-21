@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Radio Model Viewer</title>
+		<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+		<script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+		<style>
+			body{
+				background-image:url(assets/background.png);
+				/* background-position: center; */
+ 				background-repeat: no-repeat;
+  				background-size: cover;
+				height: 100%;
+			}
+			model-viewer{
+				width: 400px;
+				height: 600px;
+				margin: 0 auto;
+				/* background-color: #96cfde; */
+			}
+			button{
+				display: block;
+				width: 20px;
+				height: 20px;
+				border-radius: 10px;
+				border: none;
+				background-color: transparent;
+				box-sizing: border-box;
+ 			 }
+			#annotation{
+				background-color: #c4c0ad;
+    			position: absolute;
+    			transform: translate(10px, 10px);
+    			padding: 10px;
+				width: 100px;
+				font-size: 14px;
+			}
+		</style>
+	</head>
+	<body>
+		<model-viewer src="assets/Radio_1955.glb" camera-controls auto-rotate ar ar-modes="webxr">
+			<button id="hotspotButton" slot="hotspot-hand" data-position="5.699933720019601m 0.667956667632936m 0.2322235918518336m" data-normal="0m 1.3435883843274954e-7m -0.9999999999999911m">
+					<div id="annotation">click to listen</div>
+			</button>
+		</model-viewer>
+		<script>
+				hotspotButton.addEventListener('click', () => {
+					console.log("hello world");
+					var audio = new Audio("assets/sample.mp3");
+   					 audio.play();
+				});
+		</script>
+
+	</body>
+</html>
