@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>AR Data Visualization</title>
+		<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+		<script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap');
+			@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500&display=swap');
+			body{
+				background-color: white;
+  				background-size: cover;
+				height: 100%;
+				margin:0;
+			}
+			model-viewer#scatter-model{
+				width: 100%;
+				height: 600px;
+				margin: 0 auto;
+			}
+			model-viewer#network-model{
+				width: 100%;
+				height: 500px;
+				margin: 0 auto;
+			}
+			model-viewer#treemap-model{
+				width: 100%;
+				height: 500px;
+				margin: 0 auto;
+			}
+			button{
+				display: block;
+				width: 20px;
+				height: 20px;
+				border-radius: 10px;
+				border: none;
+				background-color: transparent;
+				box-sizing: border-box;
+ 			 }
+			#annotation{
+				background-color: #c4c0ad;
+    			position: absolute;
+    			transform: translate(10px, 10px);
+    			padding: 10px;
+				width: 100px;
+				font-size: 14px;
+			}
+			#title{
+				height: 50px;
+				margin: 20px 0 40px 0;
+			}
+			.para{
+				font-size: 1rem;
+				font-family: 'Noto Sans JP', sans-serif;
+				color: #333333;
+			}
+			.intro-img{
+				width: 100%;
+			}
+			model-viewer#scatter-model {
+                --poster-color: #374952;
+			}
+			model-viewer#network-model {
+                --poster-color: #374952;
+			}
+			model-viewer#treemap-model {
+                --poster-color: #374952;
+			}
+
+		h1{
+			color: #333333;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 400;
+            margin-top: 50px;
+            margin-bottom: 20px;
+		}
+
+		#content {
+				 margin: 10px 20% 10px 20%;;
+			}
+		@media only screen and (max-width: 800px) {
+			#content {
+				 margin: 10px 10% 10px 10%;;
+			}
+		}		
+
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<img id="title" src="assets/title.svg">
+			<img style="display: block;" src="assets/video.gif">
+			<p class="para">Augmented reality has great potential to present multi-dimensional data in an immersive way. This page demonstrates experiments with different visualization types and technologies to turn 2d graphics into AR-supported 3d models. </p>
+			<p class="para">In the first experiment, we explored the three most common types of data visualizations; scatter plot, network graph, and treemap, and analyzed the ways the AR can enhance the capabilities visualizations. </p>	
+			<p class="para">Besides visualizing multi-dimensional data, AR can also change the way how we interact with printed graphics.  Currently, one of the biggest challenges with printed data visualization is that readers cannot interact with the graphs.</p>
+			<p class="para">In the second experiment, we explored Google’s model-viewer web component to render data visualization models on the web. This library also allows users to view 3d models through Augmented Reality on supported devices.</p>
+			<p class="para">Visualization stack: 3D.js & Three.js<br>
+					AR stack: Unity 3D, Vuforia for image targeting, Model Viewer
+					</p>
+
+			<h1>Scatter Plot</h1>
+			<img class="intro-img" src="assets/scatter.png">
+			<model-viewer style="background-color: #374952;" id="scatter-model" src="assets/scatter.glb" field-of-view='360deg' camera-controls auto-rotate camera-orbit="180deg 70deg 80m" ar>
+				<!-- <button id="hotspotButton" slot="hotspot-hand" >
+						<div id="annotation">click to listen</div>
+				</button> -->
+			</model-viewer>
+
+			<h1>NETWORK VISUALIZATION</h1>
+			<img class="intro-img" src="assets/network.png">
+			<model-viewer style="background-color: #374952;" id="network-model" src="assets/network.glb" camera-controls auto-rotate camera-orbit="180deg 70deg 18m" ar>
+				<!-- <button id="hotspotButton" slot="hotspot-hand" >
+						<div id="annotation">click to listen</div>
+				</button> -->
+			</model-viewer>
+
+			<h1>TREE MAPS</h1>
+			<img class="intro-img" src="assets/treemap.png">
+			<model-viewer 
+			min-camera-orbit='auto auto 50m' max-camera-orbit='auto auto 1000m' camera-orbit='5.14rad 1.03rad 50m'
+			style="background-color: #374952;" id="treemap-model" src="assets/treemap.glb" field-of-view='360deg' camera-controls auto-rotate camera-orbit="180deg 70deg 18m" ar>
+				<!-- <button id="hotspotButton" slot="hotspot-hand" >
+						<div id="annotation">click to listen</div>
+				</button> -->
+			</model-viewer>
+			
+		</div>
+
+		<script>
+				hotspotButton.addEventListener('click', () => {
+					console.log("hello world");
+					var audio = new Audio("assets/sample.mp3");
+   					 audio.play();
+				});
+		</script>
+
+	</body>
+</html>
