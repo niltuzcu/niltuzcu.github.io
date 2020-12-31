@@ -92,7 +92,13 @@
 			#title {
 				height: 40px;
 			}
-		}		
+		}	
+		#lastpara{
+			font-size: 14px;
+			font-family: 'Source Code Pro', monospace;
+			color: #333333;
+			margin: 40px 0 40px 0;
+		}	
 
 		</style>
 	</head>
@@ -101,7 +107,7 @@
 			<img id="title" src="assets/title.svg">
 			<img style="display: block;" src="assets/video.gif">
 			<p class="para">Augmented reality has great potential to present multi-dimensional data in an immersive way. This page demonstrates experiments with different visualization types and technologies to turn 2d graphics into AR-supported 3d models. </p>
-			<p class="para">In the first experiment, we explored the three most common types of data visualizations; scatter plot, network graph, and treemap, and analyzed the ways the AR can enhance the capabilities visualizations. </p>	
+			<p class="para">In the first experiment, we explored the three most common types of data visualizations; scatter plot, network graph, and treemap, and analyzed the ways in which the AR can enhance the capabilities of visualizations. </p>	
 			<p class="para">Besides visualizing multi-dimensional data, AR can also change the way how we interact with printed graphics.  Currently, one of the biggest challenges with printed data visualization is that readers cannot interact with the graphs.</p>
 			<p class="para">In the second experiment, we explored Google’s model-viewer web component to render data visualization models on the web. This library also allows users to view 3d models through Augmented Reality on supported devices.</p>
 			<p class="para">Visualization stack: 3D.js & Three.js<br>
@@ -118,7 +124,7 @@
 
 			<h1>NETWORK VISUALIZATION</h1>
 			<img class="intro-img" src="assets/network.png">
-			<model-viewer style="background-color: #374952;" id="network-model" src="assets/network.glb" camera-controls auto-rotate camera-orbit="180deg 70deg 18m" ar ios-src="assets/network.usdz" ar-modes="scene-viewer webxr">
+			<model-viewer style="background-color: #374952;" id="network-model" src="assets/network.glb" camera-controls auto-rotate camera-orbit="180deg 70deg 18m" ar ios-src="assets/network.usdz">
 				<!-- <button id="hotspotButton" slot="hotspot-hand" >
 						<div id="annotation">click to listen</div>
 				</button> -->
@@ -134,7 +140,11 @@
 				</button> -->
 			</model-viewer>
 			
+			<p id="lastpara"><i>These experiments are created by Nil Tuzcu mostly for learning AR/XR world and exploring their implication in information design. This is an ongoing project, so you'll probably see more experiments if you come back!<br>
+				Data and 2d visualizations are borrowed from Atlas of Economic Complexity.
+			</i></p>
 		</div>
+		
 
 		<script>
 				hotspotButton.addEventListener('click', () => {
